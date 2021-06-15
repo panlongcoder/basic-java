@@ -1,5 +1,7 @@
 package cn.basic.security;
 
+import javax.crypto.Cipher;
+
 /**
  * @author dragon
  * @date 2021/6/10
@@ -17,6 +19,10 @@ public class SymmetricCipherUtilsTest {
         String decrypt = SymmetricCipherUtils.decrypt(encrypt, key,
                 SymmetricCipherUtils.Transformation.AES_ECB_PKCS5Padding);
         System.out.printf("%s 解密后: %s\n", encrypt, decrypt);
+
+        Cipher cipher = Cipher.getInstance(SymmetricCipherUtils.Transformation.AES_CBC_NoPadding.getTransformation());
+        int blockSize = cipher.getBlockSize();
+        System.out.println("blockSize:" + blockSize); // 16位
 
     }
 }

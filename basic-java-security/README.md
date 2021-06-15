@@ -11,6 +11,7 @@
 * 如果不够分4组的,空缺的就用=补齐
 
 ## 对称加密
+[分组密码](https://zh.wikipedia.org/wiki/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F)
 
 * DES:数据加密标准(Data Encryption Standard)
   > DES秘钥只能为8字节
@@ -27,7 +28,7 @@
 ### ECB
 
 ECB:电子密码本(electronic codebook).需要加密的消息按照块密码的块大小被分为数个块,并对每个块进行独立加密
-> ![img.png](img.png)
+> ![img.png](src/main/resources/img.png)
 
 * 缺点:同样的明文块会被加密成相同的密文块,不能很好地保护数据
 * 优点:可以并发处理,对于大数据
@@ -35,7 +36,7 @@ ECB:电子密码本(electronic codebook).需要加密的消息按照块密码的
 ### CBC
 
 CBC:密码块链接(Cipher-block chaining).每个明文块先与前一个密文块进行异或后，再进行加密。在这种方法中，每个密文块都依赖于它前面的所有明文块
-> ![img_1.png](img_1.png)
+> ![img_1.png](src/main/resources/img_1.png)
 
 * 优点:同样的原文生成的密文不一样
 * 缺点:串行处理数据.
