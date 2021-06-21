@@ -1,6 +1,5 @@
-package cn.basic.security.demo;
+package cn.basic.demo;
 
-import cn.hutool.core.util.HexUtil;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -22,7 +21,6 @@ public class SHADemo {
         MessageDigest messageDigest = MessageDigest.getInstance("sha-256");
         byte[] digest = messageDigest.digest(content.getBytes(StandardCharsets.UTF_8));
         System.out.println("sha-256字节数:" + digest.length); // 32
-        System.out.println(HexUtil.encodeHexStr(digest));
     }
 
     public static void sha512() throws NoSuchAlgorithmException {
@@ -30,7 +28,6 @@ public class SHADemo {
         MessageDigest messageDigest = MessageDigest.getInstance("sha-512");
         byte[] digest = messageDigest.digest(content.getBytes(StandardCharsets.UTF_8));
         System.out.println("sha-512字节数:" + digest.length); // 64
-        System.out.println(HexUtil.encodeHexStr(digest));
     }
 
 

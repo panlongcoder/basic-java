@@ -1,6 +1,5 @@
-package cn.basic.security;
+package cn.basic;
 
-import cn.hutool.core.io.FileUtil;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -38,8 +37,8 @@ public class RSADemo {
      * @return 返回公私钥对
      */
     public static KeyPair getKeyPair(String pubKeyFilePath, String priKeyFilePath) {
-        String pubKeyStr = FileUtil.readUtf8String(pubKeyFilePath);
-        String priKeyStr = FileUtil.readUtf8String(priKeyFilePath);
+        String pubKeyStr = "";
+        String priKeyStr = "";
         try {
             // 秘钥工厂
             KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
@@ -84,10 +83,6 @@ public class RSADemo {
         // 公钥
         String publicKeyStr = new String(encoder.encode(publicKey.getEncoded()));
 
-        // 写入私钥
-        FileUtil.writeUtf8String(privateKeyStr, priKeyFilePath);
-        // 写入公钥
-        FileUtil.writeUtf8String(publicKeyStr, pubKeyFilePath);
     }
 
 }

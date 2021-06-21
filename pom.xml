@@ -5,7 +5,7 @@
     <artifactId>basic-java</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>basic-java-security</module>
+        <module>basic-java-crypto</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>

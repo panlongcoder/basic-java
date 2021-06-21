@@ -1,4 +1,4 @@
-package cn.basic.security;
+package cn.basic;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

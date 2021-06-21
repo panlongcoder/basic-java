@@ -1,7 +1,4 @@
-package cn.basic.security.demo;
-
-import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.util.HexUtil;
+package cn.basic.demo;
 
 import java.io.*;
 import java.security.DigestInputStream;
@@ -57,6 +54,5 @@ public class DigestInputStreamDemo {
         }
         byte[] digest = digestInputStream.getMessageDigest().digest();
 
-        System.out.println(HexUtil.encodeHexStr(digest));
     }
 }

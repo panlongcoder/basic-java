@@ -1,9 +1,5 @@
-package cn.basic.security;
+package cn.basic;
 
-import cn.hutool.core.codec.Base64;
-
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 /**
  * @author dragon

@@ -1,6 +1,4 @@
-package cn.basic.security.demo;
-
-import cn.hutool.core.util.HexUtil;
+package cn.basic.demo;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
@@ -9,7 +7,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 /**
  * @author dragon
@@ -45,7 +42,6 @@ public class MacDemo {
         mac.init(secretKey);
 
         byte[] bytes = mac.doFinal(content.getBytes(StandardCharsets.UTF_8));
-        System.out.println(HexUtil.encodeHexStr(bytes));
 
     }
 
@@ -55,7 +51,7 @@ public class MacDemo {
 
         mac.init(keySpec);
 
-        return HexUtil.encodeHexStr(mac.doFinal(data));
+        return "";
     }
 
     public static byte[] initHMacSHA256() throws NoSuchAlgorithmException {

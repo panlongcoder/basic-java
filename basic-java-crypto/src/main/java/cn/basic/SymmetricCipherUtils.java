@@ -1,4 +1,4 @@
-package cn.basic.security;
+package cn.basic;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

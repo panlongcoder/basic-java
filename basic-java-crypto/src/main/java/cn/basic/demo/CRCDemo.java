@@ -1,6 +1,5 @@
-package cn.basic.security.demo;
+package cn.basic.demo;
 
-import cn.hutool.core.util.HexUtil;
 
 import java.nio.charset.StandardCharsets;
 import java.util.zip.CRC32;
@@ -23,8 +22,6 @@ public class CRCDemo {
         crc32.update(content.getBytes(StandardCharsets.UTF_8));
 
         long crc32Value = crc32.getValue();
-
-        System.out.println("CRC-32:" + crc32Value + "; CRC-32十六进制:" + HexUtil.toHex(crc32Value));
 
 
     }
