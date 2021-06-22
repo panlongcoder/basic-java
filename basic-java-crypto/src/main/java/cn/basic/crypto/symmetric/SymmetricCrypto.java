@@ -1,6 +1,7 @@
 package cn.basic.crypto.symmetric;
 
 
+import cn.basic.crypto.CryptoException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
@@ -13,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.spec.AlgorithmParameterSpec;
-
 /**
  * 对称加密
  *
@@ -253,4 +253,7 @@ public class SymmetricCrypto implements Serializable {
         return data;
     }
 
+    public void setAlgorithmParam(AlgorithmParameterSpec algorithmParam) {
+        this.algorithmParam = algorithmParam;
+    }
 }

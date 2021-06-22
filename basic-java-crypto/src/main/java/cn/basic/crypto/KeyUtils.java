@@ -1,6 +1,6 @@
 package cn.basic.crypto;
 
-import cn.basic.crypto.symmetric.CryptoException;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 
@@ -8,6 +8,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 /**
  * @author dragon
@@ -115,4 +116,16 @@ public class KeyUtils {
     public static String generateKeyHex(String algorithm) {
         return Hex.encodeHexString(generateKey(algorithm, -1, null).getEncoded());
     }
+
+    /**
+     * 生成向量
+     *
+     * @param ivSize 向量长度(字节)
+     * @return 字节数组
+     */
+    public static byte[] generateIv(int ivSize) {
+        SecureRandom secureRandom = new SecureRandom();
+        return secureRandom.generateSeed(ivSize);
+    }
+
 }

@@ -1,4 +1,4 @@
-package cn.basic.crypto.symmetric;
+package cn.basic.crypto;
 
 /**
  * 加解密 异常

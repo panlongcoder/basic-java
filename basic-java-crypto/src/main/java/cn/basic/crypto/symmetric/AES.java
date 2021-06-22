@@ -49,11 +49,30 @@ public class AES extends SymmetricCrypto {
     /**
      * 构造
      *
+     * @param mode    加密模式
+     * @param padding 填充模式
+     */
+    public AES(AlgorithmMode mode, AlgorithmPadding padding) {
+        this(mode, padding, KeyUtils.generateKey(ALGORITHM).getEncoded());
+    }
+
+    /**
+     * 构造
+     *
      * @param transformation 转换方式(算法/加密模式/填充模式)
      * @param key            秘钥
      */
     public AES(String transformation, byte[] key) {
         super(transformation, new SecretKeySpec(key, ALGORITHM));
+    }
+
+    /**
+     * 构造
+     *
+     * @param transformation 转换方式(算法/加密模式/填充模式)
+     */
+    public AES(String transformation) {
+        this(transformation, KeyUtils.generateKey(ALGORITHM).getEncoded());
     }
 
     /**

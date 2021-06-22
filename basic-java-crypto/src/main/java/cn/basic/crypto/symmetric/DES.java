@@ -1,5 +1,6 @@
 package cn.basic.crypto.symmetric;
 
+
 import cn.basic.crypto.KeyUtils;
 
 import javax.crypto.spec.IvParameterSpec;
@@ -30,8 +31,9 @@ public class DES extends SymmetricCrypto {
      * @param key     秘钥
      * @param iv      加密向量
      */
-    public DES(AlgorithmMode mode, AlgorithmPadding padding, byte[] key, IvParameterSpec iv) {
-        super(String.format(TRANSFORMATION, mode, padding), new SecretKeySpec(key, ALGORITHM), iv);
+    public DES(AlgorithmMode mode, AlgorithmPadding padding, byte[] key, byte[] iv) {
+        super(String.format(TRANSFORMATION, mode, padding), new SecretKeySpec(key, ALGORITHM),
+                iv != null ? new IvParameterSpec(iv) : null);
     }
 
     /**
@@ -48,11 +50,30 @@ public class DES extends SymmetricCrypto {
     /**
      * 构造
      *
+     * @param mode    加密模式
+     * @param padding 填充模式
+     */
+    public DES(AlgorithmMode mode, AlgorithmPadding padding) {
+        this(mode, padding, KeyUtils.generateKey(ALGORITHM).getEncoded(), null);
+    }
+
+    /**
+     * 构造
+     *
      * @param transformation 转换方式(算法/加密模式/填充模式)
      * @param key            秘钥
      */
     public DES(String transformation, byte[] key) {
         super(transformation, new SecretKeySpec(key, ALGORITHM));
+    }
+
+    /**
+     * 构造
+     *
+     * @param transformation 转换方式(算法/加密模式/填充模式)
+     */
+    public DES(String transformation) {
+        super(transformation, new SecretKeySpec(KeyUtils.generateKey(ALGORITHM).getEncoded(), ALGORITHM));
     }
 
     /**

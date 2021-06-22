@@ -31,4 +31,5 @@ public enum Algorithm {
     public void setTransformation(String transformation) {
         this.transformation = transformation;
     }
+
 }

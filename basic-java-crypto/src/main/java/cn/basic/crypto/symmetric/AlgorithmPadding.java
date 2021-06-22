@@ -16,12 +16,8 @@ public enum AlgorithmPadding {
      * 0补码，即不满block长度时使用0填充
      */
     ZeroPadding,
-    ISO10126Padding,
-    OAEPPadding,
-    PKCS1Padding,
     /**
      * PKCS#5 密码加密模式
      */
-    PKCS5Padding,
-    SSL3Padding;
+    PKCS5Padding;
 }
