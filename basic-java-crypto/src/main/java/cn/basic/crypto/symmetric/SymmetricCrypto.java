@@ -30,12 +30,12 @@ public class SymmetricCrypto implements Serializable {
     /**
      * 加解密 秘钥
      */
-    private SecretKey secretKey;
+    private final SecretKey secretKey;
 
     /**
      * 加解密器
      */
-    private Cipher cipher;
+    private final Cipher cipher;
 
     /**
      * 加解密 参数(向量)
