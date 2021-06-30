@@ -22,7 +22,8 @@ public class RSATest {
 
 
     @Test
-    public void test1() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public void test1() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("RSA");
 
         KeyPair keyPair = KeyUtils.generateRSAKeyPair();
@@ -38,5 +39,20 @@ public class RSATest {
         String otherPlainText = new String(cipher.doFinal(cipherBytes), StandardCharsets.UTF_8);
 
         assertEquals(true, otherPlainText.equals(plainText));
+    }
+
+    @Test
+    public void test2() {
+        RSA rsa = new RSA();
+
+        String plainText = "dragon hello world";
+
+        byte[] encryptBytes = rsa.encrypt(plainText.getBytes(StandardCharsets.UTF_8), KeyType.PUBLIC_KEY);
+
+        byte[] decryptBytes = rsa.decrypt(encryptBytes, KeyType.PRIVATE_KEY);
+
+        String anotherPlainText = new String(decryptBytes, StandardCharsets.UTF_8);
+
+        assertEquals(true, plainText.equals(anotherPlainText));
     }
 }
