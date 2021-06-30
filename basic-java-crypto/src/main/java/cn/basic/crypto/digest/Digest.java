@@ -3,6 +3,7 @@ package cn.basic.crypto.digest;
 import cn.basic.crypto.CryptoException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang.ArrayUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -99,7 +100,7 @@ public class Digest {
      * @return 散列字节数组
      */
     private byte[] doDigest(byte[] data) {
-        if (this.salt == null || this.salt.length == 0) {
+        if (ArrayUtils.isEmpty(data)) {
             return messageDigest.digest(data);
         }
         if (saltPosition <= 0) {

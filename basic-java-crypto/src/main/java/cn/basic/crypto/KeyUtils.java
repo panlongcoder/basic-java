@@ -3,12 +3,17 @@ package cn.basic.crypto;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.io.FileUtils;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @author dragon
@@ -127,5 +132,148 @@ public class KeyUtils {
         SecureRandom secureRandom = new SecureRandom();
         return secureRandom.generateSeed(ivSize);
     }
+
+    /**
+     * 生成 rsa 秘钥对
+     *
+     * @param keySize 秘钥长度(位)
+     * @return 秘钥对
+     */
+    public static KeyPair generateRSAKeyPair(int keySize) {
+        return generateKeyPair("RSA", keySize);
+    }
+
+    /**
+     * 生成秘钥对
+     * <p>
+     * 秘钥长度默认为1024位
+     *
+     * @return 秘钥对
+     */
+    public static KeyPair generateRSAKeyPair() {
+        return generateRSAKeyPair(1024);
+    }
+
+    /**
+     * 根据算法名称与秘钥长度 生成秘钥对
+     *
+     * @param algorithm 算法名称
+     * @param keySize   秘钥长度(位)
+     * @return 秘钥对对象
+     */
+    public static KeyPair generateKeyPair(String algorithm, int keySize) {
+        try {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(algorithm);
+
+            keyPairGenerator.initialize(keySize);
+
+            return keyPairGenerator.generateKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            throw new CryptoException(e);
+        }
+    }
+
+    /**
+     * 根据 算法名与 秘钥字节 构建 私钥对象
+     *
+     * @param algorithm 算法名称
+     * @param key       秘钥字节
+     * @return 私钥对象
+     */
+    public static PrivateKey generatePrivateKey(String algorithm, byte[] key) {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
+
+            PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(key);
+
+            return keyFactory.generatePrivate(pkcs8EncodedKeySpec);
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new CryptoException(e);
+        }
+    }
+
+    /**
+     * 通过 key字节数组构建 私钥对象
+     *
+     * @param key 私钥字节数组
+     * @return 构建私钥对象
+     */
+    public static PrivateKey generateRSAPrivateKey(byte[] key) {
+        return generatePrivateKey("RSA", key);
+    }
+
+    /**
+     * 通过 key字节数组构建 公钥对象
+     *
+     * @param key 字节数组
+     * @return 构建公钥对象
+     */
+    public static PublicKey generateRSAPublicKey(byte[] key) {
+        return generatePublicKey("RSA", key);
+    }
+
+    /**
+     * 根据 算法名与 秘钥字节 构建 公钥对象
+     *
+     * @param algorithm 算法名称
+     * @param key       秘钥字节
+     * @return 公钥对象
+     */
+    public static PublicKey generatePublicKey(String algorithm, byte[] key) {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
+
+            X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(key, algorithm);
+
+            return keyFactory.generatePublic(x509EncodedKeySpec);
+
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new CryptoException(e);
+        }
+    }
+
+    /**
+     * 生成RSA公私钥 并写入到文件中
+     *
+     * @param publicKeyFile  公钥文件路径
+     * @param privateKeyFile 私钥文件路径
+     */
+    public static void generateRSAKeyPairBase64ToFile(File publicKeyFile, File privateKeyFile) {
+        generateKeyPairBase64ToFile("RSA", 1024, publicKeyFile, privateKeyFile);
+    }
+
+    /**
+     * 生成RSA公私钥 并写入到文件中
+     *
+     * @param keySize        RSA 模长度(位)
+     * @param publicKeyFile  公钥文件路径
+     * @param privateKeyFile 私钥文件路径
+     */
+    public static void generateRSAKeyPairBase64ToFile(int keySize, File publicKeyFile, File privateKeyFile) {
+        generateKeyPairBase64ToFile("RSA", keySize, publicKeyFile, privateKeyFile);
+    }
+
+    /**
+     * 生成公私钥 并写入到文件中
+     *
+     * @param algorithm      算法
+     * @param publicKeyFile  公钥文件路径
+     * @param privateKeyFile 私钥文件路径
+     */
+    public static void generateKeyPairBase64ToFile(String algorithm, int keySize, File publicKeyFile, File privateKeyFile) {
+        KeyPair keyPair = generateKeyPair(algorithm, keySize);
+
+        try {
+            FileUtils.writeStringToFile(publicKeyFile, Base64.encodeBase64String(keyPair.getPublic().getEncoded()),
+                    StandardCharsets.UTF_8);
+
+            FileUtils.writeStringToFile(privateKeyFile, Base64.encodeBase64String(keyPair.getPrivate().getEncoded()),
+                    StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new CryptoException(e);
+        }
+    }
+
 
 }

@@ -4,8 +4,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.crypto.digests.MD5Digest;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.jce.provider.JCEMac;
-import org.bouncycastle.util.encoders.Base64Encoder;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;

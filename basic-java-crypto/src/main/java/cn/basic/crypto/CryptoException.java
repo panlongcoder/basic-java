@@ -12,7 +12,6 @@ public class CryptoException extends RuntimeException {
     public CryptoException() {
     }
 
-
     public CryptoException(Throwable throwable) {
         super(throwable);
     }
