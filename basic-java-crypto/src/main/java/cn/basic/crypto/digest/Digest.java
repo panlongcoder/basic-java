@@ -10,7 +10,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 
 /**
- * 摘要算法
+ *
+ * digest algorithm
+ *
+ * 算法见 https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#messagedigest-algorithms
  *
  * @author dragon
  * @date 2021/6/25

@@ -18,6 +18,10 @@ import java.security.*;
  * 由于非对称加密速度极其缓慢, 一般文件不使用它来加密而是使用对称加密来加密
  * <p>
  * 非对称加密可以用来对 对称加密的秘钥 进行加密,这样 就 可以 利用 对称加密对 文件进行加密,而又只有双方才知道 对称加密的秘钥
+ * <p>
+ * algorithm https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#cipher-algorithm-names
+ * mode https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#cipher-algorithm-modes
+ * padding https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#cipher-algorithm-paddings
  *
  * @author dragon
  * @date 2021/6/30
@@ -107,6 +111,4 @@ public class RSA {
         return KeyType.PUBLIC_KEY.equals(type) ? this.publicKey : this.privateKey;
 
     }
-
-
 }

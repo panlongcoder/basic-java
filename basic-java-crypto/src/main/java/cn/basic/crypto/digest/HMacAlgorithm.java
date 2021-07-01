@@ -1,6 +1,8 @@
 package cn.basic.crypto.digest;
 
 /**
+ * message authentication code algorithm
+ *
  * @author dragon
  * @date 2021/6/29
  */

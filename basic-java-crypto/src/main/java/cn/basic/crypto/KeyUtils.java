@@ -16,10 +16,20 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
+ * 对称加密key的algorithm
+ * 算法见: https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#keygenerator-algorithms
+ * <p>
+ * 非对称加密的keyPair的algorithm
+ * 算法见: https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#keypairgenerator-algorithms
+ *
  * @author dragon
  * @date 2021/6/21
  */
 public class KeyUtils {
+
+    private static final String SIGN_RSA = "withRSA";
+
+    private static final String SIGN_DSA = "withDSA";
 
 
     /**
@@ -163,14 +173,30 @@ public class KeyUtils {
      */
     public static KeyPair generateKeyPair(String algorithm, int keySize) {
         try {
+            if (algorithm.contains(SIGN_RSA)) {
+                algorithm = "RSA";
+            }
+            if (algorithm.contains(SIGN_DSA)) {
+                algorithm = "DSA";
+            }
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(algorithm);
-
-            keyPairGenerator.initialize(keySize);
-
+            if (keySize > 0) {
+                keyPairGenerator.initialize(keySize);
+            }
             return keyPairGenerator.generateKeyPair();
         } catch (NoSuchAlgorithmException e) {
             throw new CryptoException(e);
         }
+    }
+
+    /**
+     * 根据算法名称 生成秘钥对
+     *
+     * @param algorithm 算法名称
+     * @return 秘钥对对象
+     */
+    public static KeyPair generateKeyPair(String algorithm) {
+        return generateKeyPair(algorithm, -1);
     }
 
     /**
