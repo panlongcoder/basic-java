@@ -6,6 +6,7 @@
     <version>1.0.0</version>
     <modules>
         <module>basic-java-crypto</module>
+        <module>basic-java-validation</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
