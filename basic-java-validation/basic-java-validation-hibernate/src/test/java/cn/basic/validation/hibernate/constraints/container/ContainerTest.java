@@ -40,7 +40,6 @@ public class ContainerTest extends TestAbstractCase {
 
         print(constraintViolations);
 
-
         Assert.assertEquals(2, constraintViolations.size());
     }
 

@@ -18,7 +18,7 @@ public class CascadedTest  extends TestAbstractCase {
         ClassRoom classRoom = new ClassRoom();
 
         ClassRoom.Coder coder = new ClassRoom.Coder();
-        coder.setName("dragon");
+        coder.setName("           ");
         coder.setLevel(1);
 
         ClassRoom.Coder binbin = new ClassRoom.Coder();

@@ -3,12 +3,10 @@ package cn.basic.validation.hibernate.constraints.cascaded;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,7 +27,7 @@ public class ClassRoom {
     @Data
     public static class Coder {
 
-        @NotBlank(message = "程序员姓名不能为空")
+        @NotEmpty(message = "程序员姓名不能为空")
         private String name;
 
         @Min(value = 2, message = "至少要{value}级证书")

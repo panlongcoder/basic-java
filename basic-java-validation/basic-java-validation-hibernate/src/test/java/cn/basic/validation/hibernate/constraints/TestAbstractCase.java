@@ -4,6 +4,8 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import jakarta.validation.executable.ExecutableValidator;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.util.Objects;
@@ -15,12 +17,15 @@ import java.util.Set;
  */
 public abstract class TestAbstractCase {
 
-    protected static Validator validator;
+    protected Validator validator;
 
-    @BeforeClass
-    public static void setUpValidator() {
+    protected ExecutableValidator executableValidator;
+
+    @Before
+    public void setUpValidator() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+        executableValidator = validator.forExecutables();
     }
 
     protected <T> void print(Set<ConstraintViolation<T>> constraintViolationSet) {

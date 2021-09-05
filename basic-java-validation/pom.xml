@@ -14,7 +14,6 @@
     <modules>
         <module>basic-java-validation-hibernate</module>
         <module>basic-java-validation-springmvc</module>
-        <module>basic-java-validation-custom</module>
     </modules>
 
     <properties>
